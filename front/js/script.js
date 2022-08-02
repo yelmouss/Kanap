@@ -1,5 +1,4 @@
 // Shope depuis l'api les élements pour afficher dans notre index 
-
 fetch("http://localhost:3000/api/products")
     .then((res) => res.json())
     .then((products) => {
@@ -11,9 +10,9 @@ fetch("http://localhost:3000/api/products")
     });
 
 function ShowProducts(index) {
-    let zoneArticle = document.querySelector("#items");
+    let Vitrine = document.querySelector("#items");
     for (let article of index) {
-        zoneArticle.innerHTML += `<a href="./product.html?_id=${article._id}">
+        Vitrine.innerHTML += `<a href="./product.html?_id=${article._id}">
     <article>
       <img src="${article.imageUrl}" alt="${article.altTxt}">
       <h3 class="productName">${article.name}</h3>
