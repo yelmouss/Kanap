@@ -5,8 +5,8 @@ fetch("http://localhost:3000/api/products")
         ShowProducts(products);
     })
     .catch((err) => {
-        document.querySelector(".titles").innerHTML = "<h1>erreur 404</h1>";
-        console.log("erreur 404, sur ressource api:" + err);
+        document.querySelector(".titles").innerHTML = "<h1>error 404</h1>";
+        // console.log("error:" + err);
     });
 
 function ShowProducts(index) {
