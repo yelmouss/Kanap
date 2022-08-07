@@ -1,8 +1,8 @@
 //--------------------------------------------------------------------------
 // Récupération de l'id du produit via l' URL
 //--------------------------------------------------------------------------
-//la variable params récupère l'url de la page   
-const params = new URLSearchParams(document.location.search);
+//la variable params récupère l'url de la page   https://qastack.fr/programming/9870512/how-to-obtain-the-query-string-from-the-current-url-with-javascript
+const params = new URLSearchParams(document.location.search); //console.log(document.location);  https://developer.mozilla.org/fr/docs/Web/API/Document/location
 // la variable id va récupérer la valeur du paramètre _id
 const id = params.get("_id");
 console.log(id);
@@ -195,3 +195,4 @@ function Panier() {
     // appel fonction ajoutPremierProduit si produitsEnregistrés n'existe pas
     return ajoutPremierProduit();
 }
+//--------------------------------------------------------------------------------------------------
