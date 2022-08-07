@@ -467,3 +467,35 @@ function paquet() {
         products: panierId,
     };
 }
+
+//----------------------------------------------------------------
+// fonction sur la validation de l'envoi
+//----------------------------------------------------------------
+function envoiPaquet() {
+    tableauId();
+    paquet();
+    // vision sur le paquet que l'on veut envoyer
+    console.log(commandeFinale);
+    let somme = contactRef.regexNormal + contactRef.regexAdresse + contactRef.regexEmail;
+    // si le panierId contient des articles et que le clic est autorisé
+    if (panierId.length != 0 && somme === 5) {
+        // envoi à la ressource api
+        fetch("http://localhost:3000/api/products/order", {
+                method: "POST",
+                headers: {
+                    Accept: "application/json",
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify(commandeFinale),
+            })
+            .then((res) => res.json())
+            .then((data) => {
+                // envoyé à la page confirmation, autre écriture de la valeur "./confirmation.html?commande=${data.orderId}"
+                window.location.href = `/front/html/confirmation.html?commande=${data.orderId}`;
+            })
+            .catch(function(err) {
+                console.log(err);
+                alert("erreur");
+            });
+    }
+}
