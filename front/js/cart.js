@@ -161,3 +161,27 @@ function suppression() {
         });
     });
 }
+
+
+//--------------------------------------------------------------
+// fonction ajout nombre total produit et coût total
+//--------------------------------------------------------------
+function totalProduit() {
+    // déclaration variable en tant que nombre
+    let totalArticle = 0;
+    // déclaration variable en tant que nombre
+    let totalPrix = 0;
+    // on pointe l'élément
+    const cart = document.querySelectorAll(".cart__item");
+    // pour chaque élément cart
+    cart.forEach((cart) => {
+        //je récupère les quantités des produits grâce au dataset
+        totalArticle += JSON.parse(cart.dataset.quantité);
+        // je créais un opérateur pour le total produit grâce au dataset
+        totalPrix += cart.dataset.quantité * cart.dataset.prix;
+    });
+    // je pointe l'endroit d'affichage nombre d'article
+    document.getElementById("totalQuantity").textContent = totalArticle;
+    // je pointe l'endroit d'affichage du prix total
+    document.getElementById("totalPrice").textContent = totalPrix;
+}
