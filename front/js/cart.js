@@ -364,3 +364,30 @@ function couleurRegex(regSearch, valeurEcoute, inputAction) {
         inputAction.style.color = "white";
     }
 }
+
+
+//--------------------------------------------------------------
+// fonction d'affichage individuel des paragraphes sous input sauf pour l'input email
+//--------------------------------------------------------------
+function texteInfo(regex, pointage, zoneEcoute) {
+    if (page.match("cart")) {
+        zoneEcoute.addEventListener("input", (e) => {
+            // valeur sera la valeur de l'input en dynamique
+            valeur = e.target.value;
+            index = valeur.search(regex);
+            // si valeur est toujours un string vide et la regex différante de 0 (regex à -1 et le champ est vide mais pas d'erreur)
+            if (valeur === "" && index != 0) {
+                document.querySelector(pointage).textContent = "Veuillez renseigner ce champ.";
+                document.querySelector(pointage).style.color = "white";
+                // si valeur n'est plus un string vide et la regex différante de 0 (regex à -1 et le champ n'est pas vide donc il y a une erreur)
+            } else if (valeur !== "" && index != 0) {
+                document.querySelector(pointage).innerHTML = "Reformulez cette donnée";
+                document.querySelector(pointage).style.color = "white";
+                // pour le reste des cas (quand la regex ne décèle aucune erreur et est à 0 peu importe le champ vu qu'il est validé par la regex)
+            } else {
+                document.querySelector(pointage).innerHTML = "Caratères acceptés pour ce champ.";
+                document.querySelector(pointage).style.color = "white";
+            }
+        });
+    }
+}
