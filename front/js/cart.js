@@ -410,3 +410,16 @@ function valideClic() {
         document.querySelector("#order").setAttribute("value", "Remplir le formulaire");
     }
 }
+
+
+//----------------------------------------------------------------
+// Envoi de la commande
+//----------------------------------------------------------------
+if (page.match("cart")) {
+    commande.addEventListener("click", (e) => {
+        // empeche de recharger la page on prévient le reload du bouton
+        e.preventDefault();
+        valideClic();
+        envoiPaquet();
+    });
+}
