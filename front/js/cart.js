@@ -341,3 +341,26 @@ if (page.match("cart")) {
         }
     });
 }
+
+
+//--------------------------------------------------------------
+// fonction couleurRegex qui modifira la couleur de l'input par remplissage tapé, aide visuelle et accessibilité
+//--------------------------------------------------------------
+// on détermine une valeur de départ à valeur qui sera un string
+let valeurEcoute = "";
+// fonction à 3 arguments réutilisable, la regex, la valeur d'écoute, et la réponse à l'écoute
+function couleurRegex(regSearch, valeurEcoute, inputAction) {
+    // si valeur est toujours un string vide et la regex différante de 0 (regex à -1 et le champ est vide mais pas d'erreur)
+    if (valeurEcoute === "" && regSearch != 0) {
+        inputAction.style.backgroundColor = "white";
+        inputAction.style.color = "black";
+        // si valeur n'est plus un string vide et la regex différante de 0 (regex à -1 et le champ n'est pas vide donc il y a une erreur)
+    } else if (valeurEcoute !== "" && regSearch != 0) {
+        inputAction.style.backgroundColor = "rgb(220, 50, 50)";
+        inputAction.style.color = "white";
+        // pour le reste des cas (quand la regex ne décèle aucune erreur et est à 0 peu importe le champ vu qu'il est validé par la regex)
+    } else {
+        inputAction.style.backgroundColor = "rgb(0, 138, 0)";
+        inputAction.style.color = "white";
+    }
+}
