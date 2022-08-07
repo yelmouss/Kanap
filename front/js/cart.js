@@ -423,3 +423,24 @@ if (page.match("cart")) {
         envoiPaquet();
     });
 }
+
+
+//----------------------------------------------------------------
+// fonction récupérations des id puis mis dans un tableau
+//----------------------------------------------------------------
+// définition du panier quine comportera que les id des produits choisi du local storage
+let panierId = [];
+
+function tableauId() {
+    // appel des ressources
+    let panier = JSON.parse(localStorage.getItem("panierStocké"));
+    // récupération des id produit dans panierId
+    if (panier && panier.length > 0) {
+        for (let indice of panier) {
+            panierId.push(indice._id);
+        }
+    } else {
+        console.log("le panier est vide");
+        document.querySelector("#order").setAttribute("value", "Panier vide!");
+    }
+}
