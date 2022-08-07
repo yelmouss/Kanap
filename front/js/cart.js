@@ -1,6 +1,8 @@
 // pour différancier la page confirmation et panier
 const page = document.location.href;
-
+//----------------------------------------------------------------
+// Récupération des produits de l'api
+//----------------------------------------------------------------
 // appel de la ressource api product (voir script.js) si on est sur la page panier
 if (page.match("cart")) {
     fetch("http://localhost:3000/api/products")
@@ -17,8 +19,7 @@ if (page.match("cart")) {
 } else {
     console.log("sur page confirmation");
 }
-
-
+//--------------------------------------------------------------
 // Fonction détermine les conditions d'affichage des produits du panier
 //--------------------------------------------------------------
 function affichagePanier(index) {
@@ -53,11 +54,9 @@ function affichagePanier(index) {
             "Vous n'avez pas d'article dans votre panier";
     }
     // reste à l'écoute grâce aux fonctions suivantes pour modifier l'affichage
-    modifQte();
+    modifQuantité();
     suppression();
 }
-
-
 //--------------------------------------------------------------
 //Fonction d'affichage d'un panier (tableau)
 //--------------------------------------------------------------
@@ -91,11 +90,10 @@ function affiche(r) {
     // reste à l'écoute des modifications de quantité pour l'affichage et actualiser les données
     totalProduit();
 }
-
 //--------------------------------------------------------------
 // fonction modifQuantité on modifie dynamiquement les quantités du panier
 //--------------------------------------------------------------
-function modifQte() {
+function modifQuantité() {
     const cart = document.querySelectorAll(".cart__item");
     /* manière de regarder ce que l'on a d'affiché dynamiquement grace au dataset
      cart.forEach((cart) => {console.log("item panier en dataset: " + " " + cart.dataset.id + " " + cart.dataset.couleur + " " + cart.dataset.quantité); }); */
@@ -120,7 +118,6 @@ function modifQte() {
         });
     });
 }
-
 //--------------------------------------------------------------
 // fonction supression on supprime un article dynamiquement du panier et donc de l'affichage
 //--------------------------------------------------------------
@@ -161,8 +158,6 @@ function suppression() {
         });
     });
 }
-
-
 //--------------------------------------------------------------
 // fonction ajout nombre total produit et coût total
 //--------------------------------------------------------------
@@ -185,8 +180,6 @@ function totalProduit() {
     // je pointe l'endroit d'affichage du prix total
     document.getElementById("totalPrice").textContent = totalPrix;
 }
-
-
 //--------------------------------------------------------------
 //  formulaire
 //--------------------------------------------------------------
@@ -341,8 +334,6 @@ if (page.match("cart")) {
         }
     });
 }
-
-
 //--------------------------------------------------------------
 // fonction couleurRegex qui modifira la couleur de l'input par remplissage tapé, aide visuelle et accessibilité
 //--------------------------------------------------------------
@@ -364,8 +355,6 @@ function couleurRegex(regSearch, valeurEcoute, inputAction) {
         inputAction.style.color = "white";
     }
 }
-
-
 //--------------------------------------------------------------
 // fonction d'affichage individuel des paragraphes sous input sauf pour l'input email
 //--------------------------------------------------------------
@@ -391,8 +380,6 @@ function texteInfo(regex, pointage, zoneEcoute) {
         });
     }
 }
-
-
 //--------------------------------------------------------------
 // Fonction de validation/d'accés au clic du bouton du formulaire
 //--------------------------------------------------------------
@@ -410,8 +397,6 @@ function valideClic() {
         document.querySelector("#order").setAttribute("value", "Remplir le formulaire");
     }
 }
-
-
 //----------------------------------------------------------------
 // Envoi de la commande
 //----------------------------------------------------------------
@@ -423,8 +408,6 @@ if (page.match("cart")) {
         envoiPaquet();
     });
 }
-
-
 //----------------------------------------------------------------
 // fonction récupérations des id puis mis dans un tableau
 //----------------------------------------------------------------
@@ -444,9 +427,6 @@ function tableauId() {
         document.querySelector("#order").setAttribute("value", "Panier vide!");
     }
 }
-
-
-
 //----------------------------------------------------------------
 // fonction récupération des donnée client et panier avant transformation
 //----------------------------------------------------------------
@@ -467,7 +447,6 @@ function paquet() {
         products: panierId,
     };
 }
-
 //----------------------------------------------------------------
 // fonction sur la validation de l'envoi
 //----------------------------------------------------------------
@@ -499,8 +478,6 @@ function envoiPaquet() {
             });
     }
 }
-
-
 //------------------------------------------------------------
 // fonction affichage autoinvoquée du numéro de commande et vide du storage lorsque l'on est sur la page confirmation
 //------------------------------------------------------------
