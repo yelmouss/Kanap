@@ -444,3 +444,26 @@ function tableauId() {
         document.querySelector("#order").setAttribute("value", "Panier vide!");
     }
 }
+
+
+
+//----------------------------------------------------------------
+// fonction récupération des donnée client et panier avant transformation
+//----------------------------------------------------------------
+let contactRef;
+let commandeFinale;
+
+function paquet() {
+    contactRef = JSON.parse(localStorage.getItem("contactClient"));
+    // définition de l'objet commande
+    commandeFinale = {
+        contact: {
+            firstName: contactRef.firstName,
+            lastName: contactRef.lastName,
+            address: contactRef.address,
+            city: contactRef.city,
+            email: contactRef.email,
+        },
+        products: panierId,
+    };
+}
