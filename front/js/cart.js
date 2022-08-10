@@ -470,7 +470,7 @@ function envoiPaquet() {
             .then((res) => res.json())
             .then((data) => {
                 // envoyé à la page confirmation, autre écriture de la valeur "./confirmation.html?commande=${data.orderId}"
-                window.location.href = `/front/html/confirmation.html?commande=${data.orderId}`;
+                window.location.href = `../html/confirmation.html?commande=${data.orderId}`;
             })
             .catch(function(err) {
                 console.log(err);

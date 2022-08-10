@@ -121,6 +121,8 @@ let produitsEnregistrés = [];
 let produitsTemporaires = [];
 // déclaration tableau qui sera la concaténation des produitsEnregistrés et de produitsTemporaires
 let produitsAPousser = [];
+
+// let panierStocké = [];
 //-------------------------------------------------------------------------
 // fonction ajoutPremierProduit qui ajoute l'article choisi dans le tableau vierge
 //-------------------------------------------------------------------------
@@ -187,6 +189,5 @@ function Panier() {
         return ajoutAutreProduit();
     }
     // appel fonction ajoutPremierProduit si produitsEnregistrés n'existe pas
-
     return ajoutPremierProduit();
 }
