@@ -1,9 +1,9 @@
 // pour différancier la page confirmation et panier
 const page = document.location.href;
-//----------------------------------------------------------------
-// Récupération des produits de l'api
-//----------------------------------------------------------------
-// appel de la ressource api product (voir script.js) si on est sur la page panier
+
+
+
+
 if (page.match("cart")) {
     fetch("http://localhost:3000/api/products")
         .then((res) => res.json())
@@ -19,9 +19,8 @@ if (page.match("cart")) {
 } else {
     console.log("sur page confirmation");
 }
-//--------------------------------------------------------------
-// Fonction détermine les conditions d'affichage des produits du panier
-//--------------------------------------------------------------
+
+
 function affichagePanier(index) {
     // on récupère le panier converti
     let panier = JSON.parse(localStorage.getItem("panierStocké"));
@@ -290,9 +289,9 @@ if (page.match("cart")) {
 // le champ écouté via la regex regexChiffreLettre fera réagir, grâce à texteInfo, la zone concernée
 //------------------------------------
 texteInfo(regexChiffreLettre, "#addressErrorMsg", adresse);
-//--------------------------------------------------------------
-// Ecoute et attribution de point(pour sécurité du clic) si ce champ est ok d'après les regex
-//--------------------------------------------------------------
+
+
+
 if (page.match("cart")) {
     let regexEmail = document.querySelector(".regex_email");
     regexEmail.addEventListener("input", (e) => {
@@ -313,9 +312,10 @@ if (page.match("cart")) {
         valideClic();
     });
 }
-//------------------------------------
-// texte sous champ email
-//------------------------------------
+
+
+
+
 if (page.match("cart")) {
     email.addEventListener("input", (e) => {
         // valeur sera la valeur de l'input en dynamique
@@ -340,10 +340,10 @@ if (page.match("cart")) {
         }
     });
 }
-//--------------------------------------------------------------
-// fonction couleurRegex qui modifira la couleur de l'input par remplissage tapé, aide visuelle et accessibilité
-//--------------------------------------------------------------
-// on détermine une valeur de départ à valeur qui sera un string
+
+
+
+
 let valeurEcoute = "";
 // fonction à 3 arguments réutilisable, la regex, la valeur d'écoute, et la réponse à l'écoute
 function couleurRegex(regSearch, valeurEcoute, inputAction) {
@@ -361,9 +361,10 @@ function couleurRegex(regSearch, valeurEcoute, inputAction) {
         inputAction.style.color = "white";
     }
 }
-//--------------------------------------------------------------
-// fonction d'affichage individuel des paragraphes sous input sauf pour l'input email
-//--------------------------------------------------------------
+
+
+
+
 function texteInfo(regex, pointage, zoneEcoute) {
     if (page.match("cart")) {
         zoneEcoute.addEventListener("input", (e) => {
@@ -386,9 +387,10 @@ function texteInfo(regex, pointage, zoneEcoute) {
         });
     }
 }
-//--------------------------------------------------------------
-// Fonction de validation/d'accés au clic du bouton du formulaire
-//--------------------------------------------------------------
+
+
+
+
 let commande = document.querySelector("#order");
 // la fonction sert à valider le clic de commande de manière interactive
 function valideClic() {
@@ -414,10 +416,10 @@ if (page.match("cart")) {
         envoiPaquet();
     });
 }
-//----------------------------------------------------------------
-// fonction récupérations des id puis mis dans un tableau
-//----------------------------------------------------------------
-// définition du panier quine comportera que les id des produits choisi du local storage
+
+
+
+
 let panierId = [];
 
 function tableauId() {
@@ -433,9 +435,10 @@ function tableauId() {
         document.querySelector("#order").setAttribute("value", "Panier vide!");
     }
 }
-//----------------------------------------------------------------
-// fonction récupération des donnée client et panier avant transformation
-//----------------------------------------------------------------
+
+
+
+
 let contactRef;
 let commandeFinale;
 
@@ -453,9 +456,10 @@ function paquet() {
         products: panierId,
     };
 }
-//----------------------------------------------------------------
-// fonction sur la validation de l'envoi
-//----------------------------------------------------------------
+
+
+
+
 function envoiPaquet() {
     tableauId();
     paquet();
@@ -484,9 +488,10 @@ function envoiPaquet() {
             });
     }
 }
-//------------------------------------------------------------
-// fonction affichage autoinvoquée du numéro de commande et vide du storage lorsque l'on est sur la page confirmation
-//------------------------------------------------------------
+
+
+
+
 (function Commande() {
     if (page.match("confirmation")) {
         sessionStorage.clear();
