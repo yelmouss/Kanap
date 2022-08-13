@@ -28,10 +28,5 @@ function ShowProducts(index) {
 }
 
 // var storedNames = JSON.parse(localStorage.getItem("panierStocké"))
-
-
 // JSON.parse(localStorage.panierStocké).length = 0
-
-
-
 // alert(JSON.parse(localStorage.panierStocké).length)

@@ -43,10 +43,7 @@ function affichagePanier(index) {
                 }
             }
         }
-        // on joue affiche,  panier a des clefs/valeurs ajoutés que l'on a pas remonté dans le local storage et sont pourtant réèlles
-        // ici panier à les valeurs du local storage + les valeurs définies au dessus
-        //on demande à affiche() de jouer avec les données panier 
-        //les valeurs ajoutés à panier ont un scope agrandi puisque appelé via la fonction affiche() d'ailleur dans affiche() il n'y a pas d'appel à panier de local storage.
+
         affiche(panier);
     } else {
         // si il n'y a pas de panier on créait un H1 informatif et quantité appropriées
