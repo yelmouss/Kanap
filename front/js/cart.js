@@ -25,7 +25,10 @@ if (page.match("cart")) {
 function affichagePanier(index) {
     // on récupère le panier converti
     let panier = JSON.parse(localStorage.getItem("panierStocké"));
-    // si il y a un panier avec une taille differante de 0 (donc supérieure à 0)
+
+    let Counter = document.querySelector("span.PanierCounter");
+    Counter.innerHTML = JSON.parse(localStorage.panierStocké).length
+        // si il y a un panier avec une taille differante de 0 (donc supérieure à 0)
     if (panier && panier.length != 0) {
         // zone de correspondance clef/valeur de l'api et du panier grâce à l'id produit choisit dans le localStorage
         for (let choix of panier) {
@@ -123,6 +126,8 @@ function modifQuantité() {
 //--------------------------------------------------------------
 function suppression() {
     // déclaration de variables
+    let Counter = document.querySelector("span.PanierCounter");
+
     const cartdelete = document.querySelectorAll(".cart__item .deleteItem");
     // pour chaque élément cartdelete
     cartdelete.forEach((cartdelete) => {
@@ -151,6 +156,7 @@ function suppression() {
                     }
                     // on renvoit le nouveau panier converti dans le local storage et on joue la fonction
                     localStorage.panierStocké = JSON.stringify(nouveauPanier);
+                    Counter.innerHTML = JSON.parse(localStorage.panierStocké).length
                     totalProduit(); // logique mais pas obligatoire à cause du reload plus bas qui raffraichit l'affichage; serait necessaire avec suppression sans reload
                     // on recharge la page qui s'affiche sans le produit grace au nouveau panier
                     return location.reload();

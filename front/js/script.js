@@ -10,6 +10,9 @@ fetch("http://localhost:3000/api/products")
     });
 
 function ShowProducts(index) {
+    let Counter = document.querySelector("span.PanierCounter");
+    Counter.innerHTML += JSON.parse(localStorage.panierStocké).length
+
     let Vitrine = document.querySelector("#items");
     for (let article of index) {
         Vitrine.innerHTML += `<a href="./product.html?_id=${article._id}">
@@ -20,11 +23,15 @@ function ShowProducts(index) {
     </article>
   </a>`;
     }
+
+
 }
 
-
-var storedNames = JSON.parse(localStorage.getItem("panierStocké"))
-
+// var storedNames = JSON.parse(localStorage.getItem("panierStocké"))
 
 
-alert(JSON.parse(localStorage.panierStocké).length)
+// JSON.parse(localStorage.panierStocké).length = 0
+
+
+
+// alert(JSON.parse(localStorage.panierStocké).length)

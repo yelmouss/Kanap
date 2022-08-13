@@ -25,7 +25,10 @@ articleClient._id = id;
 
 
 function lesProduits(produit) {
-    // déclaration des variables pointage des éléments
+
+    let Counter = document.querySelector("span.PanierCounter");
+    Counter.innerHTML = JSON.parse(localStorage.panierStocké).length
+        // déclaration des variables pointage des éléments
     let imageAlt = document.querySelector("article div.item__img");
     let titre = document.querySelector("#title");
     let prix = document.querySelector("#price");
@@ -169,6 +172,7 @@ function ajoutAutreProduit() {
 function Panier() {
     // variable qui sera ce qu'on récupère du local storage appelé panierStocké et qu'on a convertit en JSon
     produitsEnregistrés = JSON.parse(localStorage.getItem("panierStocké"));
+    let Counter = document.querySelector("span.PanierCounter");
     // si produitEnregistrés existe (si des articles ont déja été choisis et enregistrés par le client)
     if (produitsEnregistrés) {
         for (let choix of produitsEnregistrés) {
@@ -186,8 +190,12 @@ function Panier() {
             }
         }
         // appel fonction ajoutAutreProduit si la boucle au dessus ne retourne rien donc n'a pas d'égalité
+        Counter.innerHTML = JSON.parse(localStorage.panierStocké).length
         return ajoutAutreProduit();
+
     }
     // appel fonction ajoutPremierProduit si produitsEnregistrés n'existe pas
+    Counter.innerHTML = JSON.parse(localStorage.panierStocké).length
     return ajoutPremierProduit();
+
 }
