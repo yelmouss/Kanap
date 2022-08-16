@@ -1,9 +1,14 @@
-const params = new URLSearchParams(document.location.search);
-
+//--------------------------------------------------------------------------
+// Récupération de l'id du produit via l' URL
+//--------------------------------------------------------------------------
+//la variable params récupère l'url de la page   https://qastack.fr/programming/9870512/how-to-obtain-the-query-string-from-the-current-url-with-javascript
+const params = new URLSearchParams(document.location.search); //console.log(document.location);  https://developer.mozilla.org/fr/docs/Web/API/Document/location
+// la variable id va récupérer la valeur du paramètre _id
 const id = params.get("_id");
 console.log(id);
-
-
+//--------------------------------------------------------------------------
+// Récupération des produits de l'api et traitement des données (voir script.js)
+//--------------------------------------------------------------------------
 fetch("http://localhost:3000/api/products")
     .then((res) => res.json())
     .then((objetProduits) => {
@@ -14,21 +19,18 @@ fetch("http://localhost:3000/api/products")
         document.querySelector(".item").innerHTML = "<h1>erreur 404</h1>";
         console.log("erreur 404, sur ressource api: " + err);
     });
-
-
-
-
+//------------------------------------------------------------------------
+// Création d'objet articleClient
+//------------------------------------------------------------------------
+// déclaration objet articleClient prêt à être modifiée par les fonctions suivantes d'évènements
 let articleClient = {};
-
+// id du procuit
 articleClient._id = id;
-
-
-
+//------------------------------------------------------------------------
+// fonction d'affichage du produit de l'api
+//------------------------------------------------------------------------
 function lesProduits(produit) {
-
-    let Counter = document.querySelector("span.PanierCounter");
-    Counter.innerHTML = JSON.parse(localStorage.panierStocké).length
-        // déclaration des variables pointage des éléments
+    // déclaration des variables pointage des éléments
     let imageAlt = document.querySelector("article div.item__img");
     let titre = document.querySelector("#title");
     let prix = document.querySelector("#price");
@@ -46,16 +48,17 @@ function lesProduits(produit) {
             // boucle pour chercher les couleurs pour chaque produit en fonction de sa clef/valeur (la logique: tableau dans un tableau = boucle dans boucle)
             for (let couleur of choix.colors) {
                 // ajout des balises d'option couleur avec leur valeur
-                couleurOption.innerHTML += `<option value="${couleur}">${couleur}</option>`;
+                var html = `<option value="${couleur}">${couleur}</option>`;
+                couleurOption.insertAdjacentHTML("beforeend", html);
             }
         }
     }
     console.log("affichage effectué");
 }
-
-
-
-
+//------------------------------------------------------------------------
+// choix couleur dynamique
+//------------------------------------------------------------------------
+// définition des variables
 let choixCouleur = document.querySelector("#colors");
 // On écoute ce qu'il se passe dans #colors
 choixCouleur.addEventListener("input", (ec) => {
@@ -69,12 +72,13 @@ choixCouleur.addEventListener("input", (ec) => {
     document.querySelector("#addToCart").textContent = "Ajouter au panier";
     console.log(couleurProduit);
 });
-
-
-
+//-------------------------------------------------------------------------
+// choix quantité dynamique
+//------------------------------------------------------------------------
+// définition des variables
 let choixQuantité = document.querySelector('input[id="quantity"]');
 let quantitéProduit;
-
+// On écoute ce qu'il se passe dans input[name="itemQuantity"]
 choixQuantité.addEventListener("input", (eq) => {
     // on récupère la valeur de la cible de l'évenement dans couleur
     quantitéProduit = eq.target.value;
@@ -109,13 +113,14 @@ choixProduit.addEventListener("click", () => {
         Panier();
         console.log("clic effectué");
         //effet visuel d'ajout de produit
-        document.querySelector("#addToCart").style.color = "rgb(0, 205, 0)";
-        document.querySelector("#addToCart").textContent = "Produit ajouté !";
+        alert("Produit ajouté !");
+        // document.querySelector("#addToCart").style.color = "rgb(0, 205, 0)";
+        // document.querySelector("#addToCart").textContent = "Produit ajouté !";
     }
 });
-
-
-
+//------------------------------------------------------------------------
+// Déclaration de tableaux utiles (voir mutation)
+//------------------------------------------------------------------------
 // déclaration tableau qui sera le 1er, unique et destiné à initialiser le panier
 let choixProduitClient = [];
 // déclaration tableau qui sera ce qu'on récupère du local storage appelé panierStocké et qu'on convertira en JSon (importance dans Panier())
@@ -124,8 +129,6 @@ let produitsEnregistrés = [];
 let produitsTemporaires = [];
 // déclaration tableau qui sera la concaténation des produitsEnregistrés et de produitsTemporaires
 let produitsAPousser = [];
-
-// let panierStocké = [];
 //-------------------------------------------------------------------------
 // fonction ajoutPremierProduit qui ajoute l'article choisi dans le tableau vierge
 //-------------------------------------------------------------------------
@@ -151,7 +154,7 @@ function ajoutAutreProduit() {
     // combine produitsTemporaires et/dans produitsEnregistrés, ça s'appele produitsAPousser
     // autre manière de faire: produitsAPousser = produitsEnregistrés.concat(produitsTemporaires);
     produitsAPousser = [...produitsEnregistrés, ...produitsTemporaires];
-    //fonction pour trier et classer les id puis les couleurs 
+    //fonction pour trier et classer les id puis les couleurs https://www.azur-web.com/astuces/javascript-trier-tableau-objet
     produitsAPousser.sort(function triage(a, b) {
         if (a._id < b._id) return -1;
         if (a._id > b._id) return 1;
@@ -172,7 +175,6 @@ function ajoutAutreProduit() {
 function Panier() {
     // variable qui sera ce qu'on récupère du local storage appelé panierStocké et qu'on a convertit en JSon
     produitsEnregistrés = JSON.parse(localStorage.getItem("panierStocké"));
-    let Counter = document.querySelector("span.PanierCounter");
     // si produitEnregistrés existe (si des articles ont déja été choisis et enregistrés par le client)
     if (produitsEnregistrés) {
         for (let choix of produitsEnregistrés) {
@@ -190,12 +192,9 @@ function Panier() {
             }
         }
         // appel fonction ajoutAutreProduit si la boucle au dessus ne retourne rien donc n'a pas d'égalité
-        Counter.innerHTML = JSON.parse(localStorage.panierStocké).length
         return ajoutAutreProduit();
-
     }
     // appel fonction ajoutPremierProduit si produitsEnregistrés n'existe pas
-    Counter.innerHTML = JSON.parse(localStorage.panierStocké).length
     return ajoutPremierProduit();
-
 }
+//--------------------------------------------------------------------------------------------------
