@@ -393,8 +393,9 @@ function valideClic() {
         commande.removeAttribute("disabled", "disabled");
         document.querySelector("#order").setAttribute("value", "Commander !");
     } else {
-        commande.setAttribute("disabled", "disabled");
-        document.querySelector("#order").setAttribute("value", "Remplir le formulaire");
+        // commande.setAttribute("disabled", "disabled");
+        // document.querySelector("#order").setAttribute("value", "Remplir le formulaire");
+        alert('Remplir le formulaire')
     }
 }
 //----------------------------------------------------------------
